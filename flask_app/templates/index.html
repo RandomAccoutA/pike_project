@@ -8,5 +8,16 @@
 </head>
 <body>
     <h1>Hello World!</h1>
+    <button onclick="callPythonFunction()">{{ button_text }}</button>
+    <script> 
+        function callPythonFunction() {
+            fetch('/call-function', { method: 'POST' })  // Make POST request
+                .then(response => response.json())       // Parse JSON response
+                .then(data => {
+                    document.getElementById("myButton").innerText = data.button_text;  // Update button text
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
 </body>
 </html>
