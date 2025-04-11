@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <button id="button" onclick="callPythonFunction()">A</button>
+    <h1 id="readout"></h1>
+
+    {% for row in range(15) %}
+        {% for col in range(15) %}
+            <button id="button{{row}}{{col}}" onclick="buttonClick(this.id)">{{col}}, {{row}}</button>
+        {% endfor %}
+        <br>
+    {% endfor %}
     
     <script> 
-        const button = document.getElementById("button"); 
+        function buttonClick(buttonID) {
+            const button = document.getElementById(buttonID)
+            const readout = document.getElementById("readout")
 
-        function callPythonFunction() {
-            if (button.textContent == "B") {
-                button.textContent = "A";
-            }
-            else {
-                button.textContent = "B";
-            }
+            readout.innerHTML += button.textContent;
         }
     </script>
 </body>
