@@ -8,15 +8,18 @@
 </head>
 <body>
     <h1>Hello World!</h1>
-    <button onclick="callPythonFunction()">{{ button_text }}</button>
+    <button id="button" onclick="callPythonFunction()">A</button>
+    
     <script> 
+        const button = document.getElementById("button"); 
+
         function callPythonFunction() {
-            fetch('/call-function', { method: 'POST' })  // Make POST request
-                .then(response => response.json())       // Parse JSON response
-                .then(data => {
-                    document.getElementById("myButton").innerText = data.button_text;  // Update button text
-                })
-                .catch(error => console.error("Error:", error));
+            if (button.textContent == "B") {
+                button.textContent = "A";
+            }
+            else {
+                button.textContent = "B";
+            }
         }
     </script>
 </body>
