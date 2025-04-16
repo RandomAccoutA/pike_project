@@ -9,8 +9,8 @@
 <body>
     <h1 id="readout"></h1>
 
-    {% for row in range(15) %}
-        {% for col in range(15) %}
+    {% for row in range(16) %}
+        {% for col in range(9) %}
             <button id="button{{row}}{{col}}" onclick="buttonClick(this.id)">{{col}}, {{row}}</button>
         {% endfor %}
         <br>
@@ -20,6 +20,19 @@
         function buttonClick(buttonID) {
             const button = document.getElementById(buttonID)
             const readout = document.getElementById("readout")
+
+            fetch("/button-press", {
+                method: "POST", 
+                body: JSON.stringify({
+                    button_name : button.textContent
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {console.log(data)})
+            .catch(error => {console.log("Error: ", error)})
 
             readout.innerHTML += button.textContent;
         }
