@@ -11,7 +11,15 @@
 
     {% for row in range(16) %}
         {% for col in range(9) %}
-            <button id="button{{row}}{{col}}" onclick="buttonClick(this.id)">{{col}}, {{row}}</button>
+            {% if row == 0 and col == 0 %}
+                <button id="button-back" onclick="buttonClick(this.id)">BACK</button>
+            {% elif row == 0 and col == 1 %}
+                <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
+            {% elif row == 0 and col == 8 %}
+                <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
+            {% else %}
+                <button id="button{{row}}{{col}}" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
+            {% endif %}
         {% endfor %}
         <br>
     {% endfor %}
@@ -21,20 +29,31 @@
             const button = document.getElementById(buttonID)
             const readout = document.getElementById("readout")
 
-            fetch("/button-press", {
-                method: "POST", 
-                body: JSON.stringify({
-                    button_name : button.textContent
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
-            .then(response => response.json())
-            .then(data => {console.log(data)})
-            .catch(error => {console.log("Error: ", error)})
+            if (button.textContent == "CLEAR") {
+                readout.innerHTML = "";
+            }
+            else if (button.textContent == "BACK") {
+                //TO DO: go to the page that contains the current page (disabled on home page)
+            }
+            else if (button.textContent == "RUN") {
+                //TO DO: show a message reading "Not Implemented In Demo"
+            }
+            else {
+                readout.innerHTML += button.textContent + " ";
 
-            readout.innerHTML += button.textContent + " ";
+                fetch("/button-press", {
+                    method: "POST", 
+                    body: JSON.stringify({
+                        button_name : button.textContent
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {console.log(data)})
+                .catch(error => {console.log("Error: ", error)})
+            }
         }
     </script>
 </body>

@@ -12,6 +12,4 @@ def button_press():
 
     button_name = data.get("button_name")
 
-    print(button_name)
-
     return jsonify({"resp": "Test Response :)"})
