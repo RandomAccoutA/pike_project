@@ -11,18 +11,33 @@
 
     {% for row in range(5) %}
         {% for col in range(9) %}
+            <!-- special -->
             {% if row == 0 and col == 0 %}
                 <button id="button-back" onclick="buttonClick(this.id)">BACK</button>
             {% elif row == 0 and col == 1 %}
                 <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
             {% elif row == 0 and col == 8 %}
-                <button id="button-run" onclick="setButtons([
-                    ['a','b','c','d','e','f','g','h','i'],
-                    ['a','b','c','d','e','f','g','h','i'],
-                    ['a','b','c','d','e','f','g','h','i'],
-                    ['a','b','c','d','e','f','g','h','i'],
-                    ['a','b','c','d','e','f','g','h','i']
-                ])">RUN</button>
+                <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
+            {% elif row == 1 and col == 0 %}
+                <button id="button-home" onclick="buttonClick(this.id)">HOME</button>
+            <!-- pronouns (7) -->
+            {% elif row == 1 and col == 1 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">I</button>
+            {% elif row == 2 and col == 0 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">you</button>
+            {% elif row == 2 and col == 1 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">it</button>  
+            {% elif row == 3 and col == 0 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">he</button>
+            {% elif row == 3 and col == 1 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">she</button>     
+            {% elif row == 4 and col == 0 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">we</button>
+            {% elif row == 4 and col == 1 %}
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">they</button>        
+            <!-- misc constant words (4) -->
+            
+            <!-- variable words -->
             {% else %}
                 <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
             {% endif %}
@@ -46,6 +61,9 @@
             }
             else if (button.textContent == "RUN") {
                 //TO DO: show a message reading "Not Implemented In Demo"
+            }
+            else if (button.textContent == "HOME") {
+                //TO DO: go to the home page (disabled on home page)
             }
             else {
                 readout.innerHTML += button.textContent + " ";
