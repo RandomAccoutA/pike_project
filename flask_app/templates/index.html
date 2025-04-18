@@ -16,7 +16,13 @@
             {% elif row == 0 and col == 1 %}
                 <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
             {% elif row == 0 and col == 8 %}
-                <button id="button-run" onclick="setButtons([ [], [], ['test'] ])">RUN</button>
+                <button id="button-run" onclick="setButtons([
+                    ['a','b','c','d','e','f','g','h','i'],
+                    ['a','b','c','d','e','f','g','h','i'],
+                    ['a','b','c','d','e','f','g','h','i'],
+                    ['a','b','c','d','e','f','g','h','i'],
+                    ['a','b','c','d','e','f','g','h','i']
+                ])">RUN</button>
             {% else %}
                 <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
             {% endif %}
@@ -65,7 +71,7 @@
                         //special button (don't change)
                         continue
                     }
-                    const button = document.getElementById("button("+row+col+")")
+                    const button = document.getElementById("button("+row+","+col+")")
 
                     if (button == null) {
                         console.log(row + " " + col)
