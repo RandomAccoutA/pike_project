@@ -9,22 +9,25 @@
 <body>
     <h1 id="readout"></h1>
 
-    {% for row in range(16) %}
+    {% for row in range(5) %}
         {% for col in range(9) %}
             {% if row == 0 and col == 0 %}
                 <button id="button-back" onclick="buttonClick(this.id)">BACK</button>
             {% elif row == 0 and col == 1 %}
                 <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
             {% elif row == 0 and col == 8 %}
-                <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
+                <button id="button-run" onclick="setButtons([ [], [], ['test'] ])">RUN</button>
             {% else %}
-                <button id="button{{row}}{{col}}" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
+                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
             {% endif %}
         {% endfor %}
         <br>
     {% endfor %}
     
-    <script> 
+    <script>
+        const gridWidth = 9
+        const gridHeight = 5
+
         function buttonClick(buttonID) {
             const button = document.getElementById(buttonID)
             const readout = document.getElementById("readout")
@@ -53,6 +56,23 @@
                 .then(response => response.json())
                 .then(data => {console.log(data)})
                 .catch(error => {console.log("Error: ", error)})
+            }
+        }
+        function setButtons(buttonArray) {
+            for (let row = 0; row < buttonArray.length; row++) {
+                for (let col = 0; col < buttonArray[row].length; col++) {
+                    if ( (row == 0 && col == 0) || (row == 0 && col == 1) || (row == 0 && col == gridWidth - 1) ) {
+                        //special button (don't change)
+                        continue
+                    }
+                    const button = document.getElementById("button("+row+col+")")
+
+                    if (button == null) {
+                        console.log(row + " " + col)
+                    }
+                    
+                    button.textContent = buttonArray[row][col]
+                }
             }
         }
     </script>
