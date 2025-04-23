@@ -7,47 +7,64 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1 id="readout"></h1>
-
-    {% for row in range(5) %}
-        {% for col in range(9) %}
-            <!-- special -->
-            {% if row == 0 and col == 0 %}
-                <button id="button-back" onclick="buttonClick(this.id)">BACK</button>
-            {% elif row == 0 and col == 1 %}
-                <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
-            {% elif row == 0 and col == 8 %}
-                <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
-            {% elif row == 1 and col == 0 %}
-                <button id="button-home" onclick="buttonClick(this.id)">HOME</button>
-            <!-- pronouns (7) -->
-            {% elif row == 1 and col == 1 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">I</button>
-            {% elif row == 2 and col == 0 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">you</button>
-            {% elif row == 2 and col == 1 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">it</button>  
-            {% elif row == 3 and col == 0 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">he</button>
-            {% elif row == 3 and col == 1 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">she</button>     
-            {% elif row == 4 and col == 0 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">we</button>
-            {% elif row == 4 and col == 1 %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">they</button>        
-            <!-- misc constant words (4) -->
-            
-            <!-- variable words -->
-            {% else %}
-                <button id="button({{row}},{{col}})" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
-            {% endif %}
-        {% endfor %}
-        <br>
-    {% endfor %}
+    <!-- TO DO: figure out this -->
+    <h1 id="readout"></h1> 
     
+    <div buttons>
+        {% for row in range(5) %}
+            {% for col in range(9) %}
+                <!-- special -->
+                {% if row == 0 and col == 0 %}
+                    <button id="button-back" onclick="buttonClick(this.id)">BACK</button>
+                {% elif row == 0 and col == 1 %}
+                    <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
+                {% elif row == 0 and col == 8 %}
+                    <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
+                {% elif row == 1 and col == 0 %}
+                    <button id="button-home" onclick="buttonClick(this.id)">HOME</button>
+                <!-- pronouns (7) -->
+                {% elif row == 1 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I</button>
+                {% elif row == 2 and col == 0 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you</button>
+                {% elif row == 2 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it</button>  
+                {% elif row == 3 and col == 0 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he</button>
+                {% elif row == 3 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she</button>     
+                {% elif row == 4 and col == 0 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we</button>
+                {% elif row == 4 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they</button>        
+                <!-- misc constant words (4) -->
+                {% elif row == 1 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not</button>  
+                {% elif row == 2 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if</button>  
+                {% elif row == 3 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then</button>  
+                {% elif row == 4 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop</button>  
+                <!-- variable words -->
+                {% else %}
+                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
+                {% endif %}
+            {% endfor %}
+            <br>
+        {% endfor %}
+    </div>
+
     <script>
         const gridWidth = 9
         const gridHeight = 5
+
+        categoryHistory = ["HOME"]
+        wordHistory = []
+
+        function capitalizeFirstLetter(val) {
+            return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+        }
 
         function buttonClick(buttonID) {
             const button = document.getElementById(buttonID)
@@ -57,21 +74,32 @@
                 readout.innerHTML = "";
             }
             else if (button.textContent == "BACK") {
-                //TO DO: go to the page that contains the current page (disabled on home page)
+                //TO DO: go to the previous page (disabled on home page)
             }
             else if (button.textContent == "RUN") {
                 //TO DO: show a message reading "Not Implemented In Demo"
             }
             else if (button.textContent == "HOME") {
                 //TO DO: go to the home page (disabled on home page)
+                categoryHistory = ["HOME"]
             }
             else {
-                readout.innerHTML += button.textContent + " ";
+                isCategory = button.textContent.startsWith("Category: ")
+
+                if (isCategory) {
+                    categoryHistory.push(button.textContent.replace("Category: ", ""))
+                }
+                else {
+                    wordHistory.push(button.textContent)
+                    readout.innerHTML += button.textContent + " "
+                    readout.innerHTML = capitalizeFirstLetter(readout.innerHTML)
+                }
 
                 fetch("/button-press", {
                     method: "POST", 
                     body: JSON.stringify({
-                        button_name : button.textContent
+                        is_category : isCategory,
+                        button_name : button.textContent.replace("Category: ", "")
                     }),
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
@@ -82,17 +110,18 @@
                 .catch(error => {console.log("Error: ", error)})
             }
         }
-        function setButtons(buttonArray) {
+        function setButtons(buttons) {
+            buttonArrayFlat = buttons.split(" ")
+            let buttonArray = []
+            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,6));
+
             for (let row = 0; row < buttonArray.length; row++) {
                 for (let col = 0; col < buttonArray[row].length; col++) {
-                    if ( (row == 0 && col == 0) || (row == 0 && col == 1) || (row == 0 && col == gridWidth - 1) ) {
-                        //special button (don't change)
-                        continue
-                    }
-                    const button = document.getElementById("button("+row+","+col+")")
+                    trueCol = col + 2
+                    const button = document.getElementById("button("+row+","+trueCol+")")
 
                     if (button == null) {
-                        console.log(row + " " + col)
+                        console.log("error setting button at row " + row + " and column " + col)
                     }
                     
                     button.textContent = buttonArray[row][col]

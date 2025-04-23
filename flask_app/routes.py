@@ -8,8 +8,19 @@ def index():
 
 @app.route('/button-press', methods=["POST"])
 def button_press():
+    resp = ""
+
     data = request.get_json()
 
     button_name = data.get("button_name")
 
-    return jsonify({"resp": "Test Response :)"})
+    if data.get("") {
+        file = open("words\\"+button_name+".txt", "r")
+        resp = file.read()
+        file.close()
+    }
+    else {
+        #TO DO: Update ML data
+    }
+
+    return jsonify({"resp": resp})
