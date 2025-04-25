@@ -1,6 +1,8 @@
 from flask_app import app
 from flask import render_template, jsonify, request
 
+from . import ml
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -14,13 +16,9 @@ def button_press():
 
     button_name = data.get("button_name")
 
-    if data.get("") {
-        file = open("words\\"+button_name+".txt", "r")
+    if data.get("is_category"):
+        file = open("flask_app/words/"+button_name+".txt", "r")
         resp = file.read()
         file.close()
-    }
-    else {
-        #TO DO: Update ML data
-    }
 
     return jsonify({"resp": resp})

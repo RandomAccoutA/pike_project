@@ -6,7 +6,7 @@
     <title>Flask App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body onload="loadPage()">
     <!-- TO DO: figure out this -->
     <h1 id="readout"></h1> 
     
@@ -15,13 +15,13 @@
             {% for col in range(9) %}
                 <!-- special -->
                 {% if row == 0 and col == 0 %}
-                    <button id="button-back" onclick="buttonClick(this.id)">BACK</button>
+                    <button id="button-back" onclick="buttonClick(this.id)" disabled>BACK</button>
                 {% elif row == 0 and col == 1 %}
                     <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
                 {% elif row == 0 and col == 8 %}
                     <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
                 {% elif row == 1 and col == 0 %}
-                    <button id="button-home" onclick="buttonClick(this.id)">HOME</button>
+                    <button id="button-home" onclick="buttonClick(this.id)" disabled>HOME</button>
                 <!-- pronouns (7) -->
                 {% elif row == 1 and col == 1 %}
                     <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I</button>
@@ -46,9 +46,9 @@
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then</button>  
                 {% elif row == 4 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop</button>  
-                <!-- variable words -->
+                <!-- variable words (non-ML and ML) -->
                 {% else %}
-                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)">({{col}}, {{row}})</button>
+                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>
                 {% endif %}
             {% endfor %}
             <br>
@@ -59,8 +59,13 @@
         const gridWidth = 9
         const gridHeight = 5
 
-        categoryHistory = ["HOME"]
+        categoryHistory = []
         wordHistory = []
+        readoutState = ""
+
+        function loadPage() {
+            buttonClick("button-home")
+        }
 
         function capitalizeFirstLetter(val) {
             return String(val).charAt(0).toUpperCase() + String(val).slice(1);
@@ -70,28 +75,40 @@
             const button = document.getElementById(buttonID)
             const readout = document.getElementById("readout")
 
-            if (button.textContent == "CLEAR") {
-                readout.innerHTML = "";
+            buttonName = button.textContent
+
+            if (buttonName == "HOME") {
+                categoryHistory = []
             }
-            else if (button.textContent == "BACK") {
-                //TO DO: go to the previous page (disabled on home page)
+            else if (buttonName == "BACK") {
+                categoryHistory.pop()
+                buttonName = categoryHistory[categoryHistory.length - 1]
             }
-            else if (button.textContent == "RUN") {
+
+            if (buttonName == "CLEAR") {
+                readout.innerHTML = ""
+            }
+            else if (buttonName == "RUN") {
                 //TO DO: show a message reading "Not Implemented In Demo"
             }
-            else if (button.textContent == "HOME") {
-                //TO DO: go to the home page (disabled on home page)
-                categoryHistory = ["HOME"]
-            }
             else {
-                isCategory = button.textContent.startsWith("Category: ")
+                isCategory = buttonName == buttonName.toUpperCase()
 
                 if (isCategory) {
-                    categoryHistory.push(button.textContent.replace("Category: ", ""))
+                    categoryHistory.push(buttonName)
+                    console.log(categoryHistory)
+                    if (buttonName == "HOME") {
+                        document.getElementById("button-home").disabled = true
+                        document.getElementById("button-back").disabled = true
+                    }
+                    else {
+                        document.getElementById("button-home").disabled = false
+                        document.getElementById("button-back").disabled = false                        
+                    }
                 }
                 else {
-                    wordHistory.push(button.textContent)
-                    readout.innerHTML += button.textContent + " "
+                    wordHistory.push(buttonName)
+                    readout.innerHTML += buttonName + " "
                     readout.innerHTML = capitalizeFirstLetter(readout.innerHTML)
                 }
 
@@ -99,25 +116,46 @@
                     method: "POST", 
                     body: JSON.stringify({
                         is_category : isCategory,
-                        button_name : button.textContent.replace("Category: ", "")
+                        button_name : buttonName,
+                        category_history : categoryHistory,
+                        word_history : wordHistory,
+                        readout_state : readoutState
                     }),
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
                     }
                 })
                 .then(response => response.json())
-                .then(data => {console.log(data)})
+                .then(data => {
+                    if (isCategory) {
+                        setNonMLButtons(data.resp)
+                    }
+                })
                 .catch(error => {console.log("Error: ", error)})
             }
         }
-        function setButtons(buttons) {
-            buttonArrayFlat = buttons.split(" ")
+        function setNonMLButtons(buttons) {
+            buttonArrayFlat = buttons.split("|")
             let buttonArray = []
-            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,6));
+            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,4));
 
             for (let row = 0; row < buttonArray.length; row++) {
                 for (let col = 0; col < buttonArray[row].length; col++) {
                     trueCol = col + 2
+                    const button = document.getElementById("button("+row+","+trueCol+")")
+
+                    if (button == null) {
+                        console.log("error setting button at row " + row + " and column " + col)
+                    }
+                    
+                    button.textContent = buttonArray[row][col]
+                }
+            }
+        }
+        function setMLButtons(buttonArray) {
+            for (let row = 0; row < buttonArray.length; row++) {
+                for (let col = 0; col < buttonArray[row].length; col++) {
+                    trueCol = col + 6
                     const button = document.getElementById("button("+row+","+trueCol+")")
 
                     if (button == null) {
