@@ -11,17 +11,162 @@
     <div class="button-grid">
         {% for row in range(5) %}
             {% for col in range(9) %}
-                <button id="button{{row}}{{col}}" onclick="buttonClick(this.id)">{{col}}, {{row}}</button>
+                <!-- special -->
+                {% if row == 0 and col == 0 %}
+                    <button id="button-back" onclick="buttonClick(this.id)" disabled>BACK</button>
+                {% elif row == 0 and col == 1 %}
+                    <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
+                {% elif row == 0 and col == 8 %}
+                    <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
+                {% elif row == 1 and col == 0 %}
+                    <button id="button-home" onclick="buttonClick(this.id)" disabled>HOME</button>
+                <!-- pronouns (7) -->
+                {% elif row == 1 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I</button>
+                {% elif row == 2 and col == 0 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you</button>
+                {% elif row == 2 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it</button>  
+                {% elif row == 3 and col == 0 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he</button>
+                {% elif row == 3 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she</button>     
+                {% elif row == 4 and col == 0 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we</button>
+                {% elif row == 4 and col == 1 %}
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they</button>        
+                <!-- misc constant words (4) -->
+                {% elif row == 1 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">the</button>  
+                {% elif row == 2 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">be</button>  
+                {% elif row == 3 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">to</button>  
+                {% elif row == 4 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">and</button>  
+                <!-- variable words (non-ML and ML) -->
+                {% else %}
+                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>
+                {% endif %}
             {% endfor %}
         {% endfor %}
     </div>
-    
-    <script> 
+
+    <script>
+        const gridWidth = 9
+        const gridHeight = 5
+
+        categoryHistory = []
+        wordHistory = []
+        readoutState = ""
+
+        function loadPage() {
+            buttonClick("button-home")
+        }
+
+        function capitalizeFirstLetter(val) {
+            return String(val).charAt(0).toUpperCase() + String(val).slice(1)
+        }
+
         function buttonClick(buttonID) {
             const button = document.getElementById(buttonID)
             const readout = document.getElementById("readout")
 
-            readout.innerHTML += button.textContent;
+            buttonName = button.textContent
+
+            if (buttonName == "HOME") {
+                categoryHistory = []
+            }
+            else if (buttonName == "BACK") {
+                categoryHistory.pop()
+                buttonName = categoryHistory[categoryHistory.length - 1]
+            }
+
+            if (buttonName == "CLEAR") {
+                readout.innerHTML = ""
+            }
+            else if (buttonName == "RUN") {
+                //TO DO: show a message reading "Not Implemented In Demo"
+            }
+            else {
+                isCategory = buttonName == buttonName.toUpperCase() && buttonName != "I"
+
+                if (isCategory) {
+                    categoryHistory.push(buttonName)
+                    console.log(categoryHistory)
+                    if (buttonName == "HOME") {
+                        document.getElementById("button-home").disabled = true
+                        document.getElementById("button-back").disabled = true
+                    }
+                    else {
+                        document.getElementById("button-home").disabled = false
+                        document.getElementById("button-back").disabled = false                        
+                    }
+                }
+                else {
+                    wordHistory.push(buttonName)
+                    readout.innerHTML += buttonName + " "
+                    readout.innerHTML = capitalizeFirstLetter(readout.innerHTML)
+                }
+
+                fetch("/button-press", {
+                    method: "POST", 
+                    body: JSON.stringify({
+                        is_category : isCategory,
+                        button_name : buttonName,
+                        category_history : categoryHistory,
+                        word_history : wordHistory,
+                        readout_state : readoutState
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (isCategory) {
+                        setNonMLButtons(data.nonml)
+                    }
+                    setMLButtons(data.ml)
+                })
+                .catch(error => {console.log("Error: ", error)})
+            }
+        }
+        function setNonMLButtons(buttons) {
+            buttonArrayFlat = buttons.split("|")
+            let buttonArray = []
+            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,4));
+
+            for (let row = 0; row < buttonArray.length; row++) {
+                for (let col = 0; col < buttonArray[row].length; col++) {
+                    trueCol = col + 2
+                    const button = document.getElementById("button("+row+","+trueCol+")")
+
+                    if (button == null) {
+                        console.log("error setting button at row " + row + " and column " + col)
+                    }
+                    
+                    button.textContent = buttonArray[row][col]
+                }
+            }
+        }
+        function setMLButtons(buttons) {
+            buttonArrayFlat = buttons.split("|")
+            let buttonArray = []
+            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,2));
+
+            for (let row = 0; row < buttonArray.length; row++) {
+                for (let col = 0; col < buttonArray[row].length; col++) {
+                    trueCol = col + 6
+                    const button = document.getElementById("button("+row+","+trueCol+")")
+
+                    if (button == null) {
+                        console.log("error setting button at row " + row + " and column " + col)
+                    }
+                    
+                    button.textContent = buttonArray[row][col]
+                }
+            }
         }
     </script>
 </body>
