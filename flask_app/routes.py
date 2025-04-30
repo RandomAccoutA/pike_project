@@ -10,7 +10,7 @@ def index():
 
 @app.route('/button-press', methods=["POST"])
 def button_press():
-    resp = ""
+    nonml_words = ""
 
     data = request.get_json()
 
@@ -18,7 +18,9 @@ def button_press():
 
     if data.get("is_category"):
         file = open("flask_app/words/"+button_name+".txt", "r")
-        resp = file.read()
+        nonml_words = file.read()
         file.close()
 
-    return jsonify({"resp": resp})
+    ml_words = ml.generate(data.get("category_history"))
+
+    return jsonify({"nonml": nonml_words, "ml": ml_words})

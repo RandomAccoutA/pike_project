@@ -40,12 +40,16 @@
                 <!-- misc constant words (4) -->
                 {% elif row == 1 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">the</button>  
                 {% elif row == 2 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">be</button>  
                 {% elif row == 3 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">to</button>  
                 {% elif row == 4 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">and</button>  
                 <!-- variable words (non-ML and ML) -->
                 {% else %}
                     <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>
@@ -59,16 +63,15 @@
         const gridWidth = 9
         const gridHeight = 5
 
-        categoryHistory = []
-        wordHistory = []
         readoutState = ""
+        categoryHistory = []
 
         function loadPage() {
             buttonClick("button-home")
         }
 
         function capitalizeFirstLetter(val) {
-            return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+            return String(val).charAt(0).toUpperCase() + String(val).slice(1)
         }
 
         function buttonClick(buttonID) {
@@ -92,11 +95,9 @@
                 //TO DO: show a message reading "Not Implemented In Demo"
             }
             else {
-                isCategory = buttonName == buttonName.toUpperCase()
+                isCategory = buttonName == buttonName.toUpperCase() && buttonName != "I"
 
                 if (isCategory) {
-                    categoryHistory.push(buttonName)
-                    console.log(categoryHistory)
                     if (buttonName == "HOME") {
                         document.getElementById("button-home").disabled = true
                         document.getElementById("button-back").disabled = true
@@ -105,9 +106,9 @@
                         document.getElementById("button-home").disabled = false
                         document.getElementById("button-back").disabled = false                        
                     }
+                    categoryHistory.push(buttonName)
                 }
                 else {
-                    wordHistory.push(buttonName)
                     readout.innerHTML += buttonName + " "
                     readout.innerHTML = capitalizeFirstLetter(readout.innerHTML)
                 }
@@ -117,9 +118,8 @@
                     body: JSON.stringify({
                         is_category : isCategory,
                         button_name : buttonName,
-                        category_history : categoryHistory,
-                        word_history : wordHistory,
-                        readout_state : readoutState
+                        readout_state : readoutState,
+                        category_history : categoryHistory
                     }),
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
@@ -128,8 +128,9 @@
                 .then(response => response.json())
                 .then(data => {
                     if (isCategory) {
-                        setNonMLButtons(data.resp)
+                        setNonMLButtons(data.nonml)
                     }
+                    setMLButtons(data.ml)
                 })
                 .catch(error => {console.log("Error: ", error)})
             }
@@ -152,7 +153,11 @@
                 }
             }
         }
-        function setMLButtons(buttonArray) {
+        function setMLButtons(buttons) {
+            buttonArrayFlat = buttons.split("|")
+            let buttonArray = []
+            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,2));
+
             for (let row = 0; row < buttonArray.length; row++) {
                 for (let col = 0; col < buttonArray[row].length; col++) {
                     trueCol = col + 6

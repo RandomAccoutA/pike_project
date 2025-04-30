@@ -1,1 +1,1 @@
-EXAMPLE CATEGORY|home page word 1|home page word 2|home page word 3
+ACTIONS|PLACES|what|finished|DESCRIBE|THINGS|where|help|TIME|LITTLE WORDS|who|stop|SCHOOL|FOOD|why|yes|FEELINGS|MISC|when|no
