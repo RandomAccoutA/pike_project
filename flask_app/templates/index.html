@@ -128,8 +128,9 @@
                 .then(response => response.json())
                 .then(data => {
                     if (isCategory) {
-                        setNonMLButtons(data.resp)
+                        setNonMLButtons(data.nonml)
                     }
+                    setMLButtons(data.ml)
                 })
                 .catch(error => {console.log("Error: ", error)})
             }
@@ -152,7 +153,11 @@
                 }
             }
         }
-        function setMLButtons(buttonArray) {
+        function setMLButtons(buttons) {
+            buttonArrayFlat = buttons.split("|")
+            let buttonArray = []
+            while(buttonArrayFlat.length > 0) buttonArray.push(buttonArrayFlat.splice(0,2));
+
             for (let row = 0; row < buttonArray.length; row++) {
                 for (let col = 0; col < buttonArray[row].length; col++) {
                     trueCol = col + 6
