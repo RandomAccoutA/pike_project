@@ -21,6 +21,6 @@ def button_press():
         nonml_words = file.read()
         file.close()
 
-    ml_words = ml.generate(data.get("word_history"), data.get("readout_state"))
+    ml_words = ml.generate(data.get("category_history"))
 
     return jsonify({"nonml": nonml_words, "ml": ml_words})
