@@ -39,13 +39,13 @@
                     <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they</button>        
                 <!-- misc constant words (4) -->
                 {% elif row == 1 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">the</button>  
                 {% elif row == 2 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">be</button>  
                 {% elif row == 3 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">to</button>  
                 {% elif row == 4 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">and</button>  
                 <!-- variable words (non-ML and ML) -->
                 {% else %}
                     <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>
@@ -68,7 +68,7 @@
         }
 
         function capitalizeFirstLetter(val) {
-            return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+            return String(val).charAt(0).toUpperCase() + String(val).slice(1)
         }
 
         function buttonClick(buttonID) {
@@ -92,7 +92,7 @@
                 //TO DO: show a message reading "Not Implemented In Demo"
             }
             else {
-                isCategory = buttonName == buttonName.toUpperCase()
+                isCategory = buttonName == buttonName.toUpperCase() && buttonName != "I"
 
                 if (isCategory) {
                     categoryHistory.push(buttonName)
