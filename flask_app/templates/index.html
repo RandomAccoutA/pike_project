@@ -24,28 +24,28 @@
                     <button id="button-home" onclick="buttonClick(this.id)" disabled>HOME</button>
                 <!-- pronouns (7) -->
                 {% elif row == 1 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 2 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 2 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it</button>  
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                 {% elif row == 3 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 3 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she</button>     
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>     
                 {% elif row == 4 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 4 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they</button>        
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>        
                 <!-- misc constant words (4) -->
                 {% elif row == 1 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                 {% elif row == 2 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                 {% elif row == 3 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                 {% elif row == 4 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop</button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                 <!-- variable words (non-ML and ML) -->
                 {% else %}
                     <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>

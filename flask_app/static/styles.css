@@ -3,3 +3,8 @@ h1 {
     text-align: center;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
+
+img {
+    width: 50px;
+    height: 50px;
+}
