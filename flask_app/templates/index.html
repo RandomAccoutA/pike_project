@@ -15,44 +15,40 @@
             {% for col in range(9) %}
                 <!-- special -->
                 {% if row == 0 and col == 0 %}
-                    <button id="button-back" onclick="buttonClick(this.id)" disabled>BACK</button>
+                    <button id="button-back" onclick="buttonClick(this.id)" disabled><span class="button-text">BACK</span></button>
                 {% elif row == 0 and col == 1 %}
-                    <button id="button-clear" onclick="buttonClick(this.id)">CLEAR</button>
+                    <button id="button-clear" onclick="buttonClick(this.id)"><span class="button-text">CLEAR</span></button>
                 {% elif row == 0 and col == 8 %}
-                    <button id="button-run" onclick="buttonClick(this.id)">RUN</button>
+                    <button id="button-run" onclick="buttonClick(this.id)" disabled><span class="button-text">RUN</span></button>
                 {% elif row == 1 and col == 0 %}
-                    <button id="button-home" onclick="buttonClick(this.id)" disabled>HOME</button>
+                    <button id="button-home" onclick="buttonClick(this.id)" disabled><span class="button-text">HOME</span></button>
                 <!-- pronouns (7) -->
                 {% elif row == 1 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I<br><img src="{{url_for('static', filename='screen.png')}}" alt="I"></button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">I</span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% elif row == 2 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you<br><img src="{{url_for('static', filename='screen.png')}}" alt="you"></button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">you</span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% elif row == 2 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it<br><img src="{{url_for('static', filename='screen.png')}}" alt="it"></button>  
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">it</span><br><img id="image({{row}},{{col}})" src=""></button>  
                 {% elif row == 3 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he<br><img src="{{url_for('static', filename='screen.png')}}" alt="he"></button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">he</span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% elif row == 3 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she<br><img src="{{url_for('static', filename='screen.png')}}" alt="she"></button>     
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">she</span><br><img id="image({{row}},{{col}})" src=""></button>     
                 {% elif row == 4 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we<br><img src="{{url_for('static', filename='screen.png')}}" alt="we"></button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">we</span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% elif row == 4 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they<br><img src="{{url_for('static', filename='screen.png')}}" alt="they"></button>        
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)"><span class="button-text">they</span><br><img id="image({{row}},{{col}})" src=""></button>        
                 <!-- misc constant words (4) -->
                 {% elif row == 1 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not<br><img src="{{url_for('static', filename='screen.png')}}" alt="not"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">the<br><img src="{{url_for('static', filename='screen.png')}}" alt="the"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)"><span class="button-text">the</span><br><img id="image({{row}},{{col}})" src=""></button>  
                 {% elif row == 2 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if<br><img src="{{url_for('static', filename='screen.png')}}" alt="if"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">be<br><img src="{{url_for('static', filename='screen.png')}}" alt="be"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)"><span class="button-text">is</span><br><img id="image({{row}},{{col}})" src=""></button>  
                 {% elif row == 3 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then<br><img src="{{url_for('static', filename='screen.png')}}" alt="then"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">to<br><img src="{{url_for('static', filename='screen.png')}}" alt="to"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)"><span class="button-text">to</span><br><img id="image({{row}},{{col}})" src=""></button>  
                 {% elif row == 4 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop<br><img src="{{url_for('static', filename='screen.png')}}" alt="stop"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">and<br><img src="{{url_for('static', filename='screen.png')}}" alt="and"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)"><span class="button-text">and</span><br><img id="image({{row}},{{col}})" src=""></button>  
                 <!-- variable words (non-ML and ML) -->
                 {% else %}
-                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>
+                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"><span class="button-text"></span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% endif %}
             {% endfor %}
             <br>
@@ -76,9 +72,10 @@
 
         function buttonClick(buttonID) {
             const button = document.getElementById(buttonID)
+            const span = button.querySelector('.button-text')
             const readout = document.getElementById("readout")
 
-            buttonName = button.textContent
+            buttonName = span.textContent
 
             if (buttonName == "HOME") {
                 categoryHistory = []
@@ -91,9 +88,7 @@
             if (buttonName == "CLEAR") {
                 readout.innerHTML = ""
             }
-            else if (buttonName == "RUN") {
-                //TO DO: show a message reading "Not Implemented In Demo"
-            }
+
             else {
                 isCategory = buttonName == buttonName.toUpperCase() && buttonName != "I"
 
@@ -134,6 +129,8 @@
                 })
                 .catch(error => {console.log("Error: ", error)})
             }
+
+            setButtonImages()
         }
         function setNonMLButtons(buttons) {
             buttonArrayFlat = buttons.split("|")
@@ -149,7 +146,7 @@
                         console.log("error setting button at row " + row + " and column " + col)
                     }
                     
-                    button.textContent = buttonArray[row][col]
+                    button.querySelector('.button-text').textContent = buttonArray[row][col]
                 }
             }
         }
@@ -167,7 +164,35 @@
                         console.log("error setting button at row " + row + " and column " + col)
                     }
                     
-                    button.textContent = buttonArray[row][col]
+                    button.querySelector('.button-text').textContent = buttonArray[row][col]
+                }
+            }
+        }
+        function setButtonImages() {
+            for (let row = 0; row < gridHeight; row++) {
+                for (let col = 0; col < gridWidth; col++) {  
+                    const button = document.getElementById("button("+row+","+col+")")
+
+                    if (button == null) {
+                        continue
+                    }
+
+                    buttonName = button.querySelector('.button-text').textContent
+
+                    console.log(row)
+                    console.log(col)
+                    console.log(buttonName)
+
+                    if (!(buttonName == buttonName.toUpperCase() && buttonName != "I")) {
+                        const image = document.getElementById("image("+row+","+col+")")
+
+                        if (image == null) {
+                            console.log("skipped")
+                            continue
+                        }
+
+                        image.src = "/static/"+buttonName+".png"
+                    }
                 }
             }
         }
