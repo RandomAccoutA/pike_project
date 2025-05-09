@@ -1,1 +1,1 @@
-word 1|word 2|word 3|word 4
+want|need|have|get|do|go|come|walk|run|sit|work|use|see|hear|taste|smell|tell|ask|feel|play

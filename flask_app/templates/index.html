@@ -40,16 +40,12 @@
                 <!-- misc constant words (4) -->
                 {% elif row == 1 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not<br><img src="{{url_for('static', filename='screen.png')}}" alt="not"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">the<br><img src="{{url_for('static', filename='screen.png')}}" alt="the"></button>  
                 {% elif row == 2 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if<br><img src="{{url_for('static', filename='screen.png')}}" alt="if"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">be<br><img src="{{url_for('static', filename='screen.png')}}" alt="be"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if<br><img src="{{url_for('static', filename='screen.png')}}" alt="if"></button>    
                 {% elif row == 3 and col == 8 %}
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then<br><img src="{{url_for('static', filename='screen.png')}}" alt="then"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">to<br><img src="{{url_for('static', filename='screen.png')}}" alt="to"></button>  
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then<br><img src="{{url_for('static', filename='screen.png')}}" alt="then"></button>   
                 {% elif row == 4 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop<br><img src="{{url_for('static', filename='screen.png')}}" alt="stop"></button>  
-                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">and<br><img src="{{url_for('static', filename='screen.png')}}" alt="and"></button>  
                 <!-- variable words (non-ML and ML) -->
                 {% else %}
                     <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"></button>
@@ -104,7 +100,7 @@
                     }
                     else {
                         document.getElementById("button-home").disabled = false
-                        document.getElementById("button-back").disabled = false                        
+                        document.getElementById("button-back").disabled = false                   
                     }
                     categoryHistory.push(buttonName)
                 }
