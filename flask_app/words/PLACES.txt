@@ -1,1 +1,1 @@
-house|bedroom|kitchen|living room|bathroom|supermarket|mall|restaurant|park|beach|movie theater|hospital|school|outside|inside|work|
+house|bedroom|kitchen|living room|bathroom|supermarket|mall|restaurant|park|beach|movie theater|hospital|school|outside|inside|work

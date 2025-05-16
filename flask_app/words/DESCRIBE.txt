@@ -1,1 +1,1 @@
-COLOR|big|small|one|SHAPE|old|new|a few|TEMPERATURE|good|bad|some|easy|boring|fun|many|hard|heavy|light|dark
+COLORS|big|small|a few|SHAPES|old|new|many|good|bad|hot|cold|easy|hard|boring|fun|heavy|light|dark|soft
