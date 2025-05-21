@@ -126,11 +126,13 @@
                         setNonMLButtons(data.nonml)
                     }
                     setMLButtons(data.ml)
+                    setButtonImages()
                 })
                 .catch(error => {console.log("Error: ", error)})
             }
 
             setButtonImages()
+
         }
         function setNonMLButtons(buttons) {
             buttonArrayFlat = buttons.split("|")
@@ -182,16 +184,19 @@
                     console.log(row)
                     console.log(col)
                     console.log(buttonName)
+                    
+                    const image = document.getElementById("image("+row+","+col+")")
+                    if (image == null) {
+                        console.log("skipped")
+                        continue
+                    }
+                    image.src = "/static/"+buttonName+".png"
 
                     if (!(buttonName == buttonName.toUpperCase() && buttonName != "I")) {
-                        const image = document.getElementById("image("+row+","+col+")")
-
-                        if (image == null) {
-                            console.log("skipped")
-                            continue
-                        }
-
-                        image.src = "/static/"+buttonName+".png"
+                        image.hidden = false
+                    }
+                    else {
+                        image.hidden = true
                     }
                 }
             }
