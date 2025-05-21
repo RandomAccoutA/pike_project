@@ -1,0 +1,1 @@
+red|orange|yellow|green|blue|purple|pink|brown|gray|black|white|dark(color)|light(color)|cyan|magenta|colorful|

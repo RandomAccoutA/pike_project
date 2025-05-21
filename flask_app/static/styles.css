@@ -43,6 +43,10 @@
   max-height: 80%;
   object-fit: contain;
 }
+button {
+    width: 100px;
+    height: 100px;
+}
 
 img {
     width: 50px;
