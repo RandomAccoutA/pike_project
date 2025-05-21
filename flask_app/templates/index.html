@@ -22,27 +22,31 @@
                     <button id="button-home" onclick="buttonClick(this.id)" disabled>HOME</button>
                 <!-- pronouns (7) -->
                 {% elif row == 1 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">I<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 2 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">you<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 2 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it</button>  
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">it<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                 {% elif row == 3 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">he<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 3 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she</button>     
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">she<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>     
                 {% elif row == 4 and col == 0 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we</button>
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">we<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>
                 {% elif row == 4 and col == 1 %}
-                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they</button>        
+                    <button id="button({{row}},{{col}})" class="pronouns" onclick="buttonClick(this.id)">they<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>        
                 <!-- misc constant words (4) -->
                 {% elif row == 1 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">not<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">the</button>  
                 {% elif row == 2 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">if<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">be</button>  
                 {% elif row == 3 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">then<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">to</button>  
                 {% elif row == 4 and col == 8 %}
+                    <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">stop<br><img src="{{url_for('static', filename='screen.png')}}" alt="image"></button>  
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)">and</button>  
                 <!-- variable words (non-ML and ML) -->
                 {% else %}
@@ -56,9 +60,8 @@
         const gridWidth = 9
         const gridHeight = 5
 
-        categoryHistory = []
-        wordHistory = []
         readoutState = ""
+        categoryHistory = []
 
         function loadPage() {
             buttonClick("button-home")
@@ -92,8 +95,6 @@
                 isCategory = buttonName == buttonName.toUpperCase() && buttonName != "I"
 
                 if (isCategory) {
-                    categoryHistory.push(buttonName)
-                    console.log(categoryHistory)
                     if (buttonName == "HOME") {
                         document.getElementById("button-home").disabled = true
                         document.getElementById("button-back").disabled = true
@@ -102,9 +103,9 @@
                         document.getElementById("button-home").disabled = false
                         document.getElementById("button-back").disabled = false                        
                     }
+                    categoryHistory.push(buttonName)
                 }
                 else {
-                    wordHistory.push(buttonName)
                     readout.innerHTML += buttonName + " "
                     readout.innerHTML = capitalizeFirstLetter(readout.innerHTML)
                 }
@@ -114,9 +115,8 @@
                     body: JSON.stringify({
                         is_category : isCategory,
                         button_name : buttonName,
-                        category_history : categoryHistory,
-                        word_history : wordHistory,
-                        readout_state : readoutState
+                        readout_state : readoutState,
+                        category_history : categoryHistory
                     }),
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
