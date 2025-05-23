@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App</title>
+    <title>AAC Device</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body onload="loadPage()">
     <h1 id="readout"></h1>
     <div class="button-grid">
         {% for row in range(5) %}
@@ -101,7 +101,7 @@
                         document.getElementById("button-home").disabled = false
                         document.getElementById("button-back").disabled = false                   
                     }
-                    
+
                     if (!back) {
                         categoryHistory.push(buttonName)
                     }
