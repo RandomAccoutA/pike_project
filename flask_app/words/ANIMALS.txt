@@ -1,1 +1,1 @@
-SEA|dog|cat|bird|horse|mouse|chicken|cow|pig|sheep|goat|frog|turtle|squirrel|turkey|bear|lion|tiger|fox|MORE ANIMALS
+SEA|dog|cat|bird|horse|mouse|chicken|cow|pig|sheep|goat|frog|turtle|squirrel|turkey|bear|lion|tiger|fox|snake
