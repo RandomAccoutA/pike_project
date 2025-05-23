@@ -1,1 +1,1 @@
-happy|sad|excited|angry|nervous|scared|embarrassed|shocked|disgusted|frustrated|bored|tired|sick
+happy|sad|angry|shocked|proud|nervous|bored|excited|scared|embarrassed|disgusted|frustrated|tired|sick|hot|cold|hungry|other|other|other
