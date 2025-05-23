@@ -6,11 +6,9 @@
     <title>Flask App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body onload="loadPage()">
-    <!-- TO DO: figure out this -->
-    <h1 id="readout"></h1> 
-    
-    <div buttons>
+<body>
+    <h1 id="readout"></h1>
+    <div class="button-grid">
         {% for row in range(5) %}
             {% for col in range(9) %}
                 <!-- special -->
@@ -51,7 +49,6 @@
                     <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"><span class="button-text"></span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% endif %}
             {% endfor %}
-            <br>
         {% endfor %}
     </div>
 

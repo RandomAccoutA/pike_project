@@ -1,7 +1,47 @@
-h1 {
-    color: #000000;
-    text-align: center;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80vh;
+}
+
+.button-grid button {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #244e86;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.button-grid button:hover {
+  background-color: #125d7d;
+  transform: translateY(-2px);
+}
+
+#readout {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+  color: #333;
+}
+
+.button-grid button img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
 }
 button {
     width: 100px;
