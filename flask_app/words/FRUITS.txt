@@ -1,1 +1,1 @@
-apple|pear|banana|orange (fruit)|strawberry|blueberry|blackberry|raspberry|cherry|grape|watermelon|melon|kiwi|pineapple|mango|avacado|pomegranate|coconut|fig|lemon
+apple|pear|banana|orange (fruit)|strawberry|blueberry|blackberry|raspberry|cherry|grape|watermelon|melon|peach|kiwi|pineapple|mango|avacado|pomegranate|coconut|lemon

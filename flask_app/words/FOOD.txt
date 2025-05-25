@@ -1,1 +1,1 @@
-water|hamburger|pizza|fried chicken|DESSERT|pasta|rice|sandwich|FRUITS|taco|burrito|hotdog|VEGETABLES|steak|seafood|salad|fries|popcorn|juice|soda
+water|hamburger|pizza|fried chicken|DESSERT|pasta|rice|sandwich|FRUITS|taco|burrito|hotdog|VEGETABLES|steak|seafood|salad|INGREDIENTS|fries|juice|soda

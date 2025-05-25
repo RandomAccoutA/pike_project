@@ -1,1 +1,1 @@
-shirt|pants|shorts|jeans|sweatpants|leggings|skirt|dress|suit|belt|tie|bow|jacket|coat|hoodie|shoes|slippers|flip flops|swimming suit|accessories
+shirt|pants|shorts|jeans|sweatpants|skirt|dress|suit|belt|tie|glasses|sunglasses|jacket|coat|hoodie|shoes|slippers|flip flops|swimming suit|accessories
