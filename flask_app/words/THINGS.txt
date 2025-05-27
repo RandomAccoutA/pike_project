@@ -1,0 +1,1 @@
+ANIMALS|car|bike|truck|CLOTHES|bus|ship|plane|NUMBERS|toys|glasses|hat|FAMILY|friend|soap|toothbrush|phone|computer|tablet - ipad|charger
