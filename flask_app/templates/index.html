@@ -17,7 +17,7 @@
                 {% elif row == 0 and col == 1 %}
                     <button id="button-clear" onclick="buttonClick(this.id)"><span class="button-text">CLEAR</span></button>
                 {% elif row == 0 and col == 8 %}
-                    <button id="button-run" onclick="buttonClick(this.id)" disabled><span class="button-text">RUN</span></button>
+                    <button id="button-run" onclick="buttonClick(this.id)"><span class="button-text">RUN</span></button>
                 {% elif row == 1 and col == 0 %}
                     <button id="button-home" onclick="buttonClick(this.id)" disabled><span class="button-text">HOME</span></button>
                 <!-- pronouns (7) -->
@@ -56,7 +56,7 @@
         const gridWidth = 9
         const gridHeight = 5
 
-        readoutState = ""
+        readoutWordList = []
         categoryHistory = []
 
         function loadPage() {
@@ -84,9 +84,43 @@
                 buttonName = categoryHistory[categoryHistory.length - 1]
                 back = true
             }
+            else if (buttonName == "RUN") {
+                fetch("/button-press", {
+                    method: "POST", 
+                    body: JSON.stringify({
+                        is_run : true,
+                        is_category : false,
+                        readout_words : readoutWordList
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {})
+                .catch(error => {console.log("Error: ", error)})
+
+                return
+            }
 
             if (buttonName == "CLEAR") {
                 readout.innerHTML = ""
+                readoutWordList = []
+
+                fetch("/button-press", {
+                    method: "POST", 
+                    body: JSON.stringify({
+                        is_run : false,
+                        is_category : false,
+                        readout_words : readoutWordList
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {setMLButtons(data.ml)})
+                .catch(error => {console.log("Error: ", error)})
             }
 
             else {
@@ -108,16 +142,18 @@
                 }
                 else {
                     readout.innerHTML += buttonName + " "
+                    readoutWordList.push(buttonName)
                     readout.innerHTML = capitalizeFirstLetter(readout.innerHTML)
                 }
 
                 fetch("/button-press", {
                     method: "POST", 
                     body: JSON.stringify({
+                        is_run : false,
+                        is_clear : false,
                         is_category : isCategory,
                         button_name : buttonName,
-                        readout_state : readoutState,
-                        category_history : categoryHistory
+                        readout_words : readoutWordList
                     }),
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
@@ -170,6 +206,14 @@
                     }
                     
                     button.querySelector('.button-text').textContent = buttonArray[row][col]
+
+                    if (buttonArray[row][col] == "") {
+                        console.log("test")
+                        button.disabled = true
+                    }
+                    else {
+                        button.disabled = false
+                    }
                 }
             }
         }
