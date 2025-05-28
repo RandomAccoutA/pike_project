@@ -1,1 +1,1 @@
-ACTIONS|PLACES|what|finished|DESCRIBE|THINGS|where|help|TIME|LITTLE WORDS|who|stop|SCHOOL|FOOD|why|yes|FEELINGS|MISC|when|no
+ACTIONS|PLACES|what|finished|DESCRIBE|THINGS|where|help|TIME|LITTLE WORDS|why|stop|SCHOOL|FOOD|want|yes|FEELINGS|MISC|need|no

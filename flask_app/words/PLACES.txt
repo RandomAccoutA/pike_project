@@ -1,1 +1,1 @@
-house|bedroom|kitchen|living room|bathroom|supermarket|mall|restaurant|school|office|library|park|beach|pool|movie theater|hospital|police station|fire station|outside|inside
+home|bedroom|kitchen|living room|bathroom|supermarket|mall|restaurant|school|office|library|park|beach|pool|movie theater|hospital|police station|fire station|outside|inside
