@@ -1,1 +1,1 @@
-square|rectangle|circle|triangle|star|heart|pentagon|hexagon|octagon|oval|arrow|crescent|diamond|cross|flower|sphere|cube|pyramid|cylinder|cone
+square|rectangle|circle|triangle|star|heart|pentagon|hexagon|octagon|oval|arrow|crescent|diamond|cross|flower (shape)|sphere|cube|pyramid|cylinder|cone
