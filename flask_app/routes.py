@@ -8,10 +8,10 @@ from . import ml
 @app.route('/index')
 def index():
     #clear datasets (for debug purposes)
-    # with open("flask_app/ml_data.pkl", "wb") as f:
-    #     pickle.dump({}, f)
-    # with open("flask_app/fw_data.pkl", "wb") as f:
-    #     pickle.dump({}, f)
+    with open("flask_app/ml_data.pkl", "wb") as f:
+        pickle.dump({}, f)
+    with open("flask_app/fw_data.pkl", "wb") as f:
+        pickle.dump({}, f)
 
     return render_template("index.html")
 

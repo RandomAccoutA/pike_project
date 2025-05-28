@@ -119,7 +119,10 @@
                     }
                 })
                 .then(response => response.json())
-                .then(data => {setMLButtons(data.ml)})
+                .then(data => {
+                    setMLButtons(data.ml)
+                    setButtonImages()
+                })
                 .catch(error => {console.log("Error: ", error)})
             }
 

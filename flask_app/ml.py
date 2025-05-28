@@ -68,8 +68,6 @@ def process(readout_words):
             dataset[readout_words[i]] = merge_pattern_sets(dataset[readout_words[i]], pattern_set)
         else:
             dataset[readout_words[i]] = pattern_set
-
-    print(dataset)
     
     with open("flask_app/ml_data.pkl", "wb") as f:
         pickle.dump(dataset, f)
@@ -96,8 +94,6 @@ def generate(readout_words):
     #
     #generate ML word set from current state of readout, using ML dataset
     #
-           
-    print(readout_words)
     
     generated_words = ["", "", "", "", "", "", "", "", "", ""]
 
