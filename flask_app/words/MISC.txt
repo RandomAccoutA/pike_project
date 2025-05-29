@@ -1,1 +1,1 @@
-ANIMALS|CLOTHES|NUMBERS|FAMILY|BEDROOM & BATHROOM|car|bike|truck|KITCHEN & LIVING ROOM|bus|ship|plane|NATURE|toys|hat|money|phone|computer|tablet - ipad|charger
+ANIMALS|CLOTHES|NUMBERS|FAMILY|BEDROOM & BATHROOM|car|bike|truck|KITCHEN & LIVING ROOM|bus|ship|plane|NATURE|toys|name|money|phone|computer|tablet - ipad|charger
