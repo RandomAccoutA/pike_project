@@ -15,7 +15,7 @@
   border-radius: 8px;
   background-color: #3b73bd;
   color: white;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 500;
   cursor: pointer;
@@ -70,8 +70,8 @@
 }
 
 .button-grid button img {
-  max-width: 65%;
-  max-height: 65%;
+  max-width: 75%;
+  max-height: 75%;
   object-fit: contain;
   margin-top: 8px;
 }
@@ -116,5 +116,25 @@ img {
 
 #button-back:hover {
   background-color: #b46737 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .button-grid button {
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+  }
+  .button-grid button img {
+    max-width: 70%;
+    max-height: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .button-grid button {
+    font-size: clamp(0.7rem, 1.2vw, 1rem);
+  }
+  .button-grid button img {
+    max-width: 65%;
+    max-height: 65%;
+  }
 }
 
