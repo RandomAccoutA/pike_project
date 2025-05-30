@@ -50,21 +50,9 @@
     transform: translateY(-2px);
   }
   
-  .button-grid button:disabled {
-    background-color: #a0a0a0;
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: none;
-  }
-  
-  .button-grid button:disabled:hover {
-    background-color: #a0a0a0;
-    transform: none;
-  }
-  
   #readout {
     text-align: center;
-    font-size: 24px;
+    font-size: 38px;
     margin: 20px 0;
     color: #333;
   }
@@ -74,6 +62,7 @@
     max-height: 75%;
     object-fit: contain;
     margin-top: 8px;
+    margin-bottom: 4px;
   }
   
   button {
@@ -82,40 +71,76 @@
   }
   
   img {
-      width: 50px;
-      height: 50px;
+      width: 100px;
+      height: 100px;
   }
   
   #button-home {
-    background-color: #4CAF50 !important; 
+    background-color: #4CAF50; 
   }
   
   #button-home:hover {
-    background-color: #45a049 !important; 
+    background-color: #45a049; 
   }
   
   #button-run {
-    background-color: #4caf82 !important; 
+    background-color: #4caf82; 
   }
   
   #button-run:hover {
-    background-color: #37805f !important; 
+    background-color: #37805f; 
   }
   
   #button-clear {
-    background-color: #af4c6b !important;
+    background-color: #af4c6b;
   }
   
   #button-clear:hover {
-    background-color: #783437 !important;
+    background-color: #783437;
   }
   
   #button-back {
-    background-color: #f8ad3d !important;
+    background-color: #f8ad3d;
   }
   
   #button-back:hover {
-    background-color: #b46737 !important;
+    background-color: #b46737;
+  }
+
+  .button-grid .pronouns {
+    background-color: #9157b8;
+  }
+
+  .button-grid .pronouns:hover {
+    background-color: #673d83;
+  }
+
+  .button-grid .misc_constant {
+    background-color: #9157b8;
+  }
+
+  .button-grid .misc_constant:hover {
+    background-color: #673d83;
+  }
+
+  .button-grid .ml {
+    background-color: #00a8ab;
+  }
+
+  .button-grid .ml:hover {
+    background-color: #0093a3;
+  }
+
+  .button-grid button:disabled {
+    background-color: #a0a0a0 !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+  }
+
+  .button-grid button:disabled:hover {
+    background-color: #a0a0a0 !important;
+    transform: none;
   }
   
   @media screen and (max-width: 768px) {

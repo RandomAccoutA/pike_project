@@ -45,8 +45,10 @@
                 {% elif row == 4 and col == 8 %}
                     <button id="button({{row}},{{col}})" class="misc_constant" onclick="buttonClick(this.id)"><span class="button-text">and</span><br><img id="image({{row}},{{col}})" src=""></button>  
                 <!-- variable words (non-ML and ML) -->
+                {% elif col < 6 %}
+                    <button id="button({{row}},{{col}})" class="nonml" onclick="buttonClick(this.id)"><span class="button-text"></span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% else %}
-                    <button id="button({{row}},{{col}})" class="variable" onclick="buttonClick(this.id)"><span class="button-text"></span><br><img id="image({{row}},{{col}})" src=""></button>
+                    <button id="button({{row}},{{col}})" class="ml" onclick="buttonClick(this.id)"><span class="button-text"></span><br><img id="image({{row}},{{col}})" src=""></button>
                 {% endif %}
             {% endfor %}
         {% endfor %}
